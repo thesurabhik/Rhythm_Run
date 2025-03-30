@@ -56,7 +56,7 @@ while True:
         face_center_percentage = (face_center_y / height) * 100
 
         # Output the percentage of the y value
-        print(f"{face_center_percentage:.2f}")
+        print(f"{face_center_percentage:.2f}", flush=True)
         #print(face_center_y)
 
     # Display the resulting frame

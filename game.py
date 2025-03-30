@@ -3,6 +3,8 @@ import threading
 import subprocess
 import queue
 import time
+import select
+
 
 class DinoGame:
     def __init__(self, root):
@@ -46,21 +48,30 @@ class DinoGame:
             ["python", "po.py"],  # Adjust filename if needed
             stdout=subprocess.PIPE,
             stderr=subprocess.PIPE,
-            text=True
+            text=True,
+            bufsize=1,  # Ensure real-time output buffering
+            universal_newlines=True
         )
 
         # Continuously read output from the face tracking process
         while self.game_running:
-            try:
+            ready_to_read, _, _ = select.select([self.face_tracking_process.stdout], [], [], 0.1)
+        
+            if ready_to_read:
                 output = self.face_tracking_process.stdout.readline().strip()
                 if output:
-                    # Put the new y percentage into the queue
-                    y_percentage = float(output)  # Convert string to float
-                    self.queue.put(y_percentage)
-
-            except Exception as e:
-                print("Error in face tracking:", e)
-                break
+                    try:
+                        y_percentage = float(output)  # Convert to float
+                        
+                        # Clear old values before adding the latest one
+                        while not self.queue.empty():
+                            self.queue.get_nowait()
+                            
+                        self.queue.put(y_percentage)  # Add latest value
+                        print(f"Received Y Percentage: {y_percentage}")  # Debugging
+                        
+                    except ValueError:
+                        print(f"Invalid output from face tracking: {output}")
 
     def update_dino_position(self):
         """Update the position of the dino block on the canvas."""
