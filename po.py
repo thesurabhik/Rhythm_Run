@@ -34,20 +34,30 @@ while True:
 
     # Draw rectangles around the faces
     for (x, y, w, h) in faces:
+        if w < 50 or h < 50:  # You can adjust these values
+            continue
         face_center_y = y + h // 2
 
-        #face_center_y = y + h // 2
+        
 
         # Determine the region based on the face's vertical center
         if face_center_y < upper_limit:
             color = red  # Upper region
+            #position = "HIGH"
         elif face_center_y < middle_limit:
             color = yellow  # Middle region
+            #position = "MIDDLE"
         else:
             color = green  # Lower region
+            #position = "LOW"
 
         # Draw the rectangle with the chosen color
         cv2.rectangle(frame, (x, y), (x + w, y + h), color, 2)
+        face_center_percentage = (face_center_y / height) * 100
+
+        # Output the percentage of the y value
+        print(f"{face_center_percentage:.2f}")
+        #print(face_center_y)
 
     # Display the resulting frame
     cv2.imshow('Head Tracking', frame)
