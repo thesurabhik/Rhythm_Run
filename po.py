@@ -5,7 +5,7 @@ face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_fronta
 
 # Start the video capture (0 for the built-in Mac camera)
 cap = cv2.VideoCapture(0)
-cap = cv2.VideoCapture(0)
+#cap = cv2.VideoCapture(0)
 if not cap.isOpened():
     print("Error: Camera not accessible")
     exit()
@@ -34,7 +34,7 @@ while True:
 
     # Draw rectangles around the faces
     for (x, y, w, h) in faces:
-        if w < 50 or h < 50:  # You can adjust these values
+        if w < 150 or h < 150:  # You can adjust these values
             continue
         face_center_y = y + h // 2
 
@@ -56,7 +56,7 @@ while True:
         face_center_percentage = (face_center_y / height) * 100
 
         # Output the percentage of the y value
-        print(f"{face_center_percentage:.2f}")
+        print(f"{face_center_percentage:.2f}", flush=True)
         #print(face_center_y)
 
     # Display the resulting frame
