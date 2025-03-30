@@ -3,24 +3,26 @@ from PIL import Image, ImageTk
 class SpriteManager:
     def __init__(self):
         self.images = {}
-        
+
     def load_images(self):
         """Load all game images or create placeholders if files don't exist."""
         try:
             # Try to load actual image files if they exist
             dino_image = Image.open("dino.png")
+            dino_image = dino_image.resize((100, 100))  # Resize image to 50x50 pixels
             self.images["dino"] = ImageTk.PhotoImage(dino_image)
-            
+
             cactus_image = Image.open("cactus.png")
+            cactus_image = cactus_image.resize((30, 40))  # Resize cactus to 30x40 pixels
             self.images["cactus"] = ImageTk.PhotoImage(cactus_image)
-            
+
             return True
         except FileNotFoundError:
             # If image files don't exist, create placeholder images
             print("Image files not found. Creating placeholder images.")
             self.create_placeholder_images()
             return False
-    
+
     def create_placeholder_images(self):
         """Create placeholder images if real sprite files are missing."""
         # Create a simple dino placeholder (green rectangle with details)
@@ -36,9 +38,9 @@ class SpriteManager:
                 if x == 43 and y == 8:
                     # Eye
                     dino_placeholder.putpixel((x, y), (0, 0, 0, 255))
-        
+
         self.images["dino"] = ImageTk.PhotoImage(dino_placeholder)
-        
+
         # Create a simple cactus placeholder (red spiky shape)
         cactus_placeholder = Image.new('RGBA', (30, 40), (0, 0, 0, 0))
         for y in range(40):
@@ -50,9 +52,9 @@ class SpriteManager:
                     (20 <= x <= 30 and 15 <= y <= 25)):
                     # Arms
                     cactus_placeholder.putpixel((x, y), (220, 0, 0, 255))
-        
+
         self.images["cactus"] = ImageTk.PhotoImage(cactus_placeholder)
-    
+
     def get_image(self, name):
         """Get an image by name."""
         return self.images.get(name)

@@ -1,6 +1,6 @@
 class PhysicsEngine:
     def __init__(self):
-        self.gravity = 0.6
+        self.gravity = 0.8
         self.jump_strength = -12  # Negative because y-axis is inverted in tkinter
         self.ground_level = 150
     
