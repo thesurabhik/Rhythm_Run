@@ -485,3 +485,4 @@ while pose_index < len(pose_library):
 cap.release()
 cv2.destroyAllWindows()
 '''
+#wow im goomp!!!
