@@ -79,11 +79,12 @@ class DinoGame:
             # Check if there is any new data in the queue
             if not self.queue.empty():
                 y_percentage = self.queue.get_nowait()
-                self.dino_y = int(50 + (y_percentage / 100) * 100)  # Scale Y position
+                self.dino_y = int(200 * (y_percentage/100))  # Scale Y position
                 # Update the dino's position on the canvas
                 self.canvas.coords(self.dino, 75, self.dino_y, 125, self.dino_y + 50)
         except queue.Empty:
             pass  # No new data in the queue
+    
 
 # Run the game
 root = tk.Tk()

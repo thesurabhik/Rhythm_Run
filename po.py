@@ -34,7 +34,7 @@ while True:
 
     # Draw rectangles around the faces
     for (x, y, w, h) in faces:
-        if w < 50 or h < 50:  # You can adjust these values
+        if w < 150 or h < 150:  # You can adjust these values
             continue
         face_center_y = y + h // 2
 
