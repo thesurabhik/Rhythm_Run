@@ -1,4 +1,4 @@
-'''
+
 import cv2
 import numpy as np
 import time
@@ -142,7 +142,7 @@ if pose_index >= len(pose_library):
 cap.release()
 cv2.destroyAllWindows()
 
-
+'''
 import cv2
 import numpy as np
 
@@ -345,6 +345,7 @@ while True:
 cap.release()
 cv2.destroyAllWindows()
 '''
+'''
 import cv2
 import numpy as np
 import time
@@ -483,3 +484,4 @@ while pose_index < len(pose_library):
 
 cap.release()
 cv2.destroyAllWindows()
+'''
