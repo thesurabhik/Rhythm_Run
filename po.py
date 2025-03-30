@@ -5,7 +5,7 @@ face_cascade = cv2.CascadeClassifier(cv2.data.haarcascades + 'haarcascade_fronta
 
 # Start the video capture (0 for the built-in Mac camera)
 cap = cv2.VideoCapture(0)
-cap = cv2.VideoCapture(0)
+#cap = cv2.VideoCapture(0)
 if not cap.isOpened():
     print("Error: Camera not accessible")
     exit()
